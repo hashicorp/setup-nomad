@@ -24,7 +24,7 @@ jobs:
         run: nomad version
 
       - name: Validate `nomad` version is latest (`1.5.0-beta.1``)
-        run: "if nomad version | grep -q 'CLI: v1.5.0-beta.1'; then exit 0; else exit 1; fi;"
+        run: "if nomad version | grep -q 'Nomad v1.5.0-beta.1'; then exit 0; else exit 1; fi;"
 
       - name: Run `nomad fmt`
         run: nomad fmt "${{ github.action_path }}./test/example.nomad"
