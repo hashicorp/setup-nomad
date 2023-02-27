@@ -1,6 +1,5 @@
 job "example" {
-  datacenters = ["dc1"]
-  type        = "service"
+  type = "service"
 
   update {
     max_parallel      = 1
@@ -37,9 +36,8 @@ job "example" {
     restart {
       attempts = 2
       interval = "30m"
-
-      delay = "15s"
-      mode  = "fail"
+      delay    = "15s"
+      mode     = "fail"
     }
 
     ephemeral_disk {

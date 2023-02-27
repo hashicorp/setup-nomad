@@ -43,7 +43,7 @@ jobs:
         uses: hashicorp/setup-nomad@v1
         id: setup
         with:
-          version: "1.5.0-beta.1" # or `latest`
+          version: "1.5.0" # or `latest`
 
       - name: Run `nomad version`
         id: version
@@ -54,7 +54,7 @@ In the above example, the following definitions have been set.
 
 - The event trigger has been set to `push`. For a complete list, see [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows).
 - The origin of this GitHub Action has been set as `hashicorp/setup-nomad@v1`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad/releases).
-- The version of `nomad` to set up has been set as `1.5.0-beta.1`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad/).
+- The version of `nomad` to set up has been set as `1.5.0`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad/).
 
 These definitions may require updating to suit your deployment, such as specifying [self-hosted](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-self-hosted-runners) runners.
 
@@ -65,6 +65,9 @@ Additionally, you may configure [outputs](https://docs.github.com/en/actions/usi
 This section contains a list of all inputs that may be set for this Action.
 
 - `version` - (required) The version of `nomad` to install. Defaults to `latest`.
+
+> **Note**
+> To retrieve the `latest` version, this GitHub Action polls the HashiCorp [Releases API](https://api.releases.hashicorp.com/v1/releases/nomad) and finds the latest released version of Nomad OSS that isn't marked as a pre-release (`is_prerelease`).
 
 ## Outputs
 
