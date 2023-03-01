@@ -1,0 +1,48 @@
+name: "GitHub Action: Self-Test"
+
+on:
+  push:
+
+jobs:
+  setup-nomad:
+    runs-on: ubuntu-latest
+    name: Test `setup-nomad`
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup `nomad` (using local GitHub Action)
+        uses: "./"
+        id: setup
+        with:
+          version: "1.5.0"
+
+      - name: Print `$PATH` for `nomad`
+        run: which nomad
+
+      - name: Print `nomad` version
+        run: nomad version
+
+      - name: Validate `nomad` version is accurate
+        run: "nomad version | grep --silent 'Nomad v1.4.5'"
+
+      - name: Run `nomad fmt`
+        run: nomad fmt "${{ github.action_path }}./test/example.nomad.hcl"
+
+      - name: Setup `nomad` with an invalid version (using local GitHub Action)
+        uses: "./"
+        id: invalid_version
+        with:
+          version: "invalid_version"
+        continue-on-error: true
+
+      - name: Validate invalid version failed
+        if: steps.invalid_version.outcome == 'success'
+        run: echo "Installing an invalid version expected to fail but did not" && exit 1
+
+      - name: Setup `nomad` with `latest` version (using local GitHub Action)
+        uses: "./"
+        id: latest_version
+
+      - name: Print `nomad` version
+        run: nomad version

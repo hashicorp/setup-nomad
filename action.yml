@@ -1,0 +1,22 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+name: "Setup HashiCorp Nomad"
+author: "Kerim Satirli"
+description: "A GitHub Action to install a specific version of HashiCorp Nomad and add it to PATH."
+inputs:
+  version:
+    description: "The Nomad version to install and add to PATH."
+    required: true
+    default: "latest"
+outputs:
+  version:
+    description: "The Nomad version that was installed and added to PATH."
+runs:
+  using: "node16"
+  main: "dist/index.js"
+branding:
+  icon: "terminal"
+  color: "green"
