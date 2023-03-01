@@ -15,7 +15,7 @@ jobs:
         uses: "./"
         id: setup
         with:
-          version: "1.5.0-beta.1"
+          version: "1.5.0"
 
       - name: Print `$PATH` for `nomad`
         run: which nomad
@@ -24,7 +24,7 @@ jobs:
         run: nomad version
 
       - name: Validate `nomad` version is accurate
-        run: "if nomad version | grep -q 'Nomad v1.5.0-beta.1'; then exit 0; else exit 1; fi;"
+        run: "nomad version | grep --silent 'Nomad v1.4.5'"
 
       - name: Run `nomad fmt`
         run: nomad fmt "${{ github.action_path }}./test/example.nomad.hcl"
