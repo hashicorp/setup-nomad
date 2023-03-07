@@ -8,6 +8,11 @@ jobs:
   snyk:
     runs-on: ubuntu-latest
 
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
     strategy:
       # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategyfail-fast
       fail-fast: false
