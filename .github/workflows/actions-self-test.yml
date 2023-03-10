@@ -30,7 +30,7 @@ jobs:
         run: "nomad version | grep --silent 'Nomad v${{ env.PRODUCT_VERSION }}'"
 
       - name: Run `nomad fmt`
-        run: nomad fmt "${{ github.action_path }}./test/example.nomad.hcl"
+        run: nomad fmt -check "${{ github.action_path }}./test/example.nomad.hcl"
 
       - name: Setup `nomad` with an invalid version (using local GitHub Action)
         uses: "./"
