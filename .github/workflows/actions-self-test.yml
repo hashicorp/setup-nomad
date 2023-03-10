@@ -3,6 +3,9 @@ name: "GitHub Action: Self-Test"
 on:
   push:
 
+env:
+  PRODUCT_VERSION: "1.5.0"
+
 jobs:
   setup-nomad:
     runs-on: ubuntu-latest
@@ -15,7 +18,7 @@ jobs:
         uses: "./"
         id: setup
         with:
-          version: "1.5.0"
+          version: ${{ env.PRODUCT_VERSION }}
 
       - name: Print `$PATH` for `nomad`
         run: which nomad
@@ -24,7 +27,7 @@ jobs:
         run: nomad version
 
       - name: Validate `nomad` version is accurate
-        run: "nomad version | grep --silent 'Nomad v1.5.0'"
+        run: "nomad version | grep --silent 'Nomad v${{ env.PRODUCT_VERSION }}'"
 
       - name: Run `nomad fmt`
         run: nomad fmt "${{ github.action_path }}./test/example.nomad.hcl"

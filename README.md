@@ -31,6 +31,9 @@ name: nomad
 on:
   - push
 
+env:
+  PRODUCT_VERSION: "1.5.0"
+
 jobs:
   nomad:
     runs-on: ubuntu-latest
@@ -40,10 +43,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup `nomad`
-        uses: hashicorp/setup-nomad@v1
+        uses: hashicorp/setup-nomad@v1.0.0
         id: setup
         with:
-          version: "1.5.0" # or `latest`
+          version: ${{ env.PRODUCT_VERSION }}
 
       - name: Run `nomad version`
         id: version
