@@ -2,6 +2,8 @@
 
 The `hashicorp/setup-nomad` Action sets up the [Nomad](https://www.nomadproject.io) CLI in your GitHub Actions workflow by adding the `nomad` binary to `PATH`.
 
+[![GitHub Action: Self-Test](https://github.com/hashicorp/setup-nomad/actions/workflows/actions-self-test.yml/badge.svg?branch=main)](https://github.com/hashicorp/setup-nomad/actions/workflows/actions-self-test.yml)
+
 ## Table of Contents
 
 <!-- TOC -->
@@ -31,6 +33,9 @@ name: nomad
 on:
   - push
 
+env:
+  PRODUCT_VERSION: "1.5.0"
+
 jobs:
   nomad:
     runs-on: ubuntu-latest
@@ -40,10 +45,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup `nomad`
-        uses: hashicorp/setup-nomad@v1
+        uses: hashicorp/setup-nomad@v1.0.0
         id: setup
         with:
-          version: "1.5.0" # or `latest`
+          version: ${{ env.PRODUCT_VERSION }}
 
       - name: Run `nomad version`
         id: version
@@ -53,7 +58,7 @@ jobs:
 In the above example, the following definitions have been set.
 
 - The event trigger has been set to `push`. For a complete list, see [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows).
-- The origin of this GitHub Action has been set as `hashicorp/setup-nomad@v1`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad/releases).
+- The origin of this GitHub Action has been set as `hashicorp/setup-nomad@v1.0.0`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad/releases).
 - The version of `nomad` to set up has been set as `1.5.0`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad/).
 
 These definitions may require updating to suit your deployment, such as specifying [self-hosted](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-self-hosted-runners) runners.
