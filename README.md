@@ -72,7 +72,7 @@ This section contains a list of all inputs that may be set for this Action.
 - `version` - (required) The version of `nomad` to install. Defaults to `latest` if unset.
 
 > [!NOTE]
-> To retrieve the `latest` version, this GitHub Action polls the HashiCorp [Releases API](https://api.releases.hashicorp.com/v1/releases/nomad) and finds the latest released version of Nomad OSS that isn't marked as a pre-release (`is_prerelease`).
+> To retrieve the `latest` version, this GitHub Action polls the HashiCorp [Releases API](https://api.releases.hashicorp.com/v1/releases/nomad) and finds the latest released version of Nomad that isn't marked as a pre-release (`is_prerelease`).
 
 ## Outputs
 
