@@ -1,61 +1,68 @@
-job "example" {
-  type = "service"
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: Apache-2.0
 
-  update {
-    max_parallel      = 1
-    min_healthy_time  = "10s"
-    healthy_deadline  = "3m"
-    progress_deadline = "10m"
-    auto_revert       = false
-    canary            = 0
+job "hello-world" {
+  # Specifies the datacenter where this job should be run
+  # This can be omitted and it will default to ["*"]
+  datacenters = ["*"]
+
+  meta {
+    # User-defined key/value pairs that can be used in your jobs.
+    # You can also use this meta block within Group and Task levels.
+    foo = "bar"
   }
 
-  migrate {
-    max_parallel     = 1
-    health_check     = "checks"
-    min_healthy_time = "10s"
-    healthy_deadline = "5m"
-  }
+  # A group defines a series of tasks that should be co-located
+  # on the same client (host). All tasks within a group will be
+  # placed on the same host.
+  group "servers" {
 
-  group "cache" {
+    # Specifies the number of instances of this group that should be running.
+    # Use this to scale or parallelize your job.
+    # This can be omitted and it will default to 1.
     count = 1
 
     network {
-      port "db" {
-        to = 6379
+      port "www" {
+        to = 8001
       }
     }
 
     service {
-      name     = "redis-cache"
-      tags     = ["global", "cache"]
-      port     = "db"
       provider = "nomad"
+      port     = "www"
     }
 
-    restart {
-      attempts = 2
-      interval = "30m"
-      delay    = "15s"
-      mode     = "fail"
-    }
-
-    ephemeral_disk {
-      size = 300
-    }
-
-    task "redis" {
+    # Tasks are individual units of work that are run by Nomad.
+    task "web" {
+      # This particular task starts a simple web server within a Docker container
       driver = "docker"
 
       config {
-        image          = "redis:7"
-        ports          = ["db"]
-        auth_soft_fail = true
+        image   = "busybox:1"
+        command = "httpd"
+        args    = ["-v", "-f", "-p", "${NOMAD_PORT_www}", "-h", "/local"]
+        ports   = ["www"]
       }
 
+      template {
+        data        = <<-EOF
+                      <h1>Hello, Nomad!</h1>
+                      <ul>
+                        <li>Task: {{env "NOMAD_TASK_NAME"}}</li>
+                        <li>Group: {{env "NOMAD_GROUP_NAME"}}</li>
+                        <li>Job: {{env "NOMAD_JOB_NAME"}}</li>
+                        <li>Metadata value for foo: {{env "NOMAD_META_foo"}}</li>
+                        <li>Currently running on port: {{env "NOMAD_PORT_www"}}</li>
+                      </ul>
+                      EOF
+        destination = "local/index.html"
+      }
+
+      # Specify the maximum resources required to run the task
       resources {
-        cpu    = 500 # 500 MHz
-        memory = 256 # 256MB
+        cpu    = 50
+        memory = 64
       }
     }
   }
