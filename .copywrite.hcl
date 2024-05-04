@@ -6,7 +6,7 @@ schema_version = 1
 project {
     license          = "Apache-2.0"
     copyright_holder = "HashiCorp, Inc."
-    copyright_year   = 2023
+    copyright_year   = 2024
 
     header_ignore = [
         "dist/*",

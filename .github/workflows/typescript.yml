@@ -1,4 +1,5 @@
 ---
+
 name: "Code Quality: TypeScript"
 
 on:
@@ -8,6 +9,9 @@ jobs:
   nodejs:
     name: Node.js
     runs-on: ubuntu-latest
+
+    env:
+      PACKAGES: "@vercel/ncc prettier"
 
     strategy:
       # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategyfail-fast
@@ -28,8 +32,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      - name: Install NPM Packages
-        run: npm ci
+      - name: Install global NPM packages
+        run: npm install --global ${PACKAGES}
+
+      - name: Install Action-specific NPM Packages
+        run: npm install-clean
 
       - name: Build TypeScript code
-        run: npm run build
+        run: |
+          npm run-script fmt \
+          && \
+          npm run-script build
