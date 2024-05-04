@@ -7,7 +7,7 @@ The `hashicorp/setup-nomad` Action sets up the [Nomad](https://www.nomadproject.
 ## Table of Contents
 
 <!-- TOC -->
-* [GitHub Action: setup-nomad](#github-action--setup-nomad)
+* [GitHub Action: `setup-nomad`](#github-action-setup-nomad)
   * [Table of Contents](#table-of-contents)
   * [Requirements](#requirements)
   * [Usage](#usage)
