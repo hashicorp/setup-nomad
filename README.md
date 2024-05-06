@@ -7,7 +7,7 @@ The `hashicorp/setup-nomad` Action sets up the [Nomad](https://www.nomadproject.
 ## Table of Contents
 
 <!-- TOC -->
-* [GitHub Action: setup-nomad](#github-action--setup-nomad)
+* [GitHub Action: `setup-nomad`](#github-action-setup-nomad)
   * [Table of Contents](#table-of-contents)
   * [Requirements](#requirements)
   * [Usage](#usage)
@@ -25,16 +25,16 @@ Specific [`nomad`](https://developer.hashicorp.com/nomad/docs/commands) commands
 
 ## Usage
 
-1.) Create a GitHub Actions Workflow file (e.g.: `.github/workflows/nomad.yml`):
+Create a GitHub Actions Workflow file (e.g.: `.github/workflows/nomad.yml`):
 
 ```yaml
 name: nomad
 
 on:
-  - push
+  push:
 
 env:
-  PRODUCT_VERSION: "1.5.0"
+  PRODUCT_VERSION: "1.7.0" # or: "latest"
 
 jobs:
   nomad:
@@ -42,10 +42,10 @@ jobs:
     name: Run Nomad
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup `nomad`
-        uses: hashicorp/setup-nomad@v1.0.0
+        uses: hashicorp/setup-nomad@main
         id: setup
         with:
           version: ${{ env.PRODUCT_VERSION }}
@@ -58,8 +58,8 @@ jobs:
 In the above example, the following definitions have been set.
 
 - The event trigger has been set to `push`. For a complete list, see [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows).
-- The origin of this GitHub Action has been set as `hashicorp/setup-nomad@v1.0.0`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad/releases).
-- The version of `nomad` to set up has been set as `1.5.0`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad/).
+- The origin of this GitHub Action has been set as `hashicorp/setup-nomad@main`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad/releases).
+- The version of `nomad` to set up has been set as `1.7.0`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad/).
 
 These definitions may require updating to suit your deployment, such as specifying [self-hosted](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-self-hosted-runners) runners.
 
@@ -69,10 +69,10 @@ Additionally, you may configure [outputs](https://docs.github.com/en/actions/usi
 
 This section contains a list of all inputs that may be set for this Action.
 
-- `version` - (required) The version of `nomad` to install. Defaults to `latest`.
+- `version` - (required) The version of `nomad` to install. Defaults to `latest` if unset.
 
-> **Note**
-> To retrieve the `latest` version, this GitHub Action polls the HashiCorp [Releases API](https://api.releases.hashicorp.com/v1/releases/nomad) and finds the latest released version of Nomad OSS that isn't marked as a pre-release (`is_prerelease`).
+> [!NOTE]
+> To retrieve the `latest` version, this GitHub Action polls the HashiCorp [Releases API](https://api.releases.hashicorp.com/v1/releases/nomad) and finds the latest released version of Nomad that isn't marked as a pre-release (`is_prerelease`).
 
 ## Outputs
 
