@@ -6,7 +6,7 @@ on:
   push:
 
 env:
-  PRODUCT_VERSION: "1.7.0"
+  PRODUCT_VERSION: "1.8.0"
 
 jobs:
   setup-nomad:

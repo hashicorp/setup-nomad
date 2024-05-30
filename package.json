@@ -1,6 +1,6 @@
 {
   "name": "setup-nomad",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A GitHub Action to install a specific version of HashiCorp Nomad and add it to PATH.",
   "keywords": [
     "github-actions",
