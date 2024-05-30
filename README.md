@@ -34,7 +34,7 @@ on:
   push:
 
 env:
-  PRODUCT_VERSION: "1.7.0" # or: "latest"
+  PRODUCT_VERSION: "1.8.0" # or: "latest"
 
 jobs:
   nomad:
@@ -59,7 +59,7 @@ In the above example, the following definitions have been set.
 
 - The event trigger has been set to `push`. For a complete list, see [Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows).
 - The origin of this GitHub Action has been set as `hashicorp/setup-nomad@main`. For newer versions, see the [Releases](https://github.com/hashicorp/setup-nomad/releases).
-- The version of `nomad` to set up has been set as `1.7.0`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad/).
+- The version of `nomad` to set up has been set as `1.8.0`. For a complete list, see [releases.hashicorp.com](https://releases.hashicorp.com/nomad/).
 
 These definitions may require updating to suit your deployment, such as specifying [self-hosted](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-self-hosted-runners) runners.
 
