@@ -49,6 +49,7 @@ jobs:
         id: setup
         with:
           version: ${{ env.PRODUCT_VERSION }}
+          ent: true
 
       - name: Run `nomad version`
         id: version
@@ -70,6 +71,7 @@ Additionally, you may configure [outputs](https://docs.github.com/en/actions/usi
 This section contains a list of all inputs that may be set for this Action.
 
 - `version` - (required) The version of `nomad` to install. Defaults to `latest` if unset.
+- `ent` - Specifies if we should install Nomad Enterprise instead of Community Edition. Defaults to `false` if unset.
 
 > [!NOTE]
 > To retrieve the `latest` version, this GitHub Action polls the HashiCorp [Releases API](https://api.releases.hashicorp.com/v1/releases/nomad) and finds the latest released version of Nomad that isn't marked as a pre-release (`is_prerelease`).

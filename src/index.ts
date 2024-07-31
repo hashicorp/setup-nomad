@@ -9,7 +9,10 @@ import * as hc from "@hashicorp/github-actions-core";
 export const PRODUCT = "nomad";
 
 async function main() {
-  const version = core.getInput("version");
+  var version = core.getInput("version");
+  if (core.getInput("ent")) {
+    version += "-ent"
+  }
   if (version == null) {
     core.setFailed("Required field 'version' not set");
     return;

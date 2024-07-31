@@ -11,6 +11,10 @@ inputs:
     description: "The Nomad version to install and add to PATH."
     required: true
     default: "latest"
+  ent:
+    description: "Should we install the enterprise version?"
+    required: false
+    default: false
 outputs:
   version:
     description: "The Nomad version that was installed and added to PATH."
