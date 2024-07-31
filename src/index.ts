@@ -9,16 +9,14 @@ import * as hc from "@hashicorp/github-actions-core";
 export const PRODUCT = "nomad";
 
 async function main() {
-  var version = core.getInput("version");
-  if (core.getInput("ent")) {
-    version += "-ent"
-  }
+  const version = core.getInput("version");
+  const ent = core.getInput("ent");
   if (version == null) {
     core.setFailed("Required field 'version' not set");
     return;
   }
   try {
-    await hc.getHashicorpRelease(PRODUCT, version);
+    await hc.getHashicorpRelease(PRODUCT, version, ent);
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message);
