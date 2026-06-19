@@ -34,7 +34,7 @@ on:
   push:
 
 env:
-  PRODUCT_VERSION: "1.8.0" # or: "latest"
+  PRODUCT_VERSION: "2.0.0" # or: "latest"
 
 jobs:
   nomad:
