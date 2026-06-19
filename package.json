@@ -1,6 +1,6 @@
 {
   "name": "setup-nomad",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A GitHub Action to install a specific version of HashiCorp Nomad and add it to PATH.",
   "keywords": [
     "github-actions",
@@ -12,7 +12,7 @@
     "url": "git@github.com:hashicorp/setup-nomad.git"
   },
   "license": "Apache-2.0",
-  "author": "Kerim Satirli <kerim@hashicorp.com>",
+  "author": "Kerim Satirli <kerim@ibm.com>",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && ncc build --no-cache",
