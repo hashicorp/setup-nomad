@@ -1,11 +1,11 @@
-# Copyright (c) HashiCorp, Inc.
+# Copyright (c) IBM Corp.
 # SPDX-License-Identifier: Apache-2.0
 
 schema_version = 1
 
 project {
     license          = "Apache-2.0"
-    copyright_holder = "HashiCorp, Inc."
+    copyright_holder = "IBM Corp."
     copyright_year   = 2024
 
     header_ignore = [

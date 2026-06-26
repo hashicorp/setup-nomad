@@ -15,7 +15,7 @@ outputs:
   version:
     description: "The Nomad version that was installed and added to PATH."
 runs:
-  using: "node20"
+  using: "node24"
   main: "dist/index.js"
 branding:
   icon: "terminal"
